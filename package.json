@@ -4,5 +4,8 @@
   "version": "1.0.2",
   "description": "Runs scripts inside of Atom.",
   "repository": "https://github.com/lsegal/atom-runner",
+  "dependencies": {
+    "ansi-to-html": "0.1.x"
+  },
   "license": "MIT"
 }
