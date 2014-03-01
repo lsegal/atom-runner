@@ -2,7 +2,7 @@ spawn = require('child_process').spawn
 fs = require('fs')
 url = require('url')
 
-RunnerView = require './runner-view'
+AtomRunnerView = require './atom-runner-view'
 
 module.exports =
   extensionMap: null
@@ -34,8 +34,8 @@ module.exports =
       return
 
     previousPane = atom.workspaceView.getActivePaneView()
-    if not @runnerView? or atom.workspaceView.find('.atom-runner-content').size() == 0
-      @runnerView = new RunnerView(editor.getTitle())
+    if not @runnerView? or atom.workspaceView.find('.atom-runner').size() == 0
+      @runnerView = new AtomRunnerView(editor.getTitle())
       panes = atom.workspaceView.getPaneViews()
       @pane = panes[panes.length - 1].splitRight(@runnerView)
 

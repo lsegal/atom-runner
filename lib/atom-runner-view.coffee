@@ -2,17 +2,17 @@
 AnsiToHtml = require 'ansi-to-html'
 
 module.exports =
-class RunnerView extends ScrollView
+class AtomRunnerView extends ScrollView
   atom.deserializers.add(this)
 
   @deserialize: ({title, output, footer}) ->
-    view = new RunnerView(title)
+    view = new AtomRunnerView(title)
     view._output.html(output)
     view._footer.html(footer)
     view
 
   @content: ->
-    @div class: 'atom-runner-content', =>
+    @div class: 'atom-runner', =>
       @h1 'Atom Runner'
       @pre class: 'output'
       @div class: 'footer'
@@ -24,7 +24,7 @@ class RunnerView extends ScrollView
     @setTitle(title)
 
   serialize: ->
-    deserializer: 'RunnerView'
+    deserializer: 'AtomRunnerView'
     title: @title
     output: @_output.html()
     footer: @_footer.html()

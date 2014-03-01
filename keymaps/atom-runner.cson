@@ -7,6 +7,8 @@
 
 # For more detailed documentation see
 # https://atom.io/docs/latest/advanced/keymaps
+'.editor':
+  'cmd-r': 'atom-runner:run'
+
 '.workspace':
-  'cmd-r': 'runner:run'
-  'ctrl-c': 'runner:stop'
+  'ctrl-c': 'atom-runner:stop'
