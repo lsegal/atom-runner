@@ -1,7 +1,7 @@
 {
   "name": "atom-runner",
   "main": "./lib/runner",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Runs scripts inside of Atom.",
   "repository": "https://github.com/lsegal/atom-runner",
   "license": "MIT"
