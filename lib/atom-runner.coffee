@@ -1,12 +1,15 @@
+{ConfigObserver} = require 'atom'
+
 spawn = require('child_process').spawn
 fs = require('fs')
 url = require('url')
 
 AtomRunnerView = require './atom-runner-view'
 
-module.exports =
-  extensionMap: null
-  scopeMap: null
+class AtomRunner
+  cfg:
+    ext: 'runner.extensions'
+    scope: 'runner.scopes'
 
   defaultExtensionMap:
     'spec.coffee': 'jasmine-node --coffee'
@@ -17,13 +20,25 @@ module.exports =
     ruby: 'ruby'
     python: 'python'
 
+  extensionMap: null
+  scopeMap: null
+
+  destroy: ->
+    atom.config.unobserve @cfg.ext
+    atom.config.unobserve @cfg.scope
+
   activate: ->
     @runnerView = null
+    atom.config.setDefaults @cfg.ext, @defaultExtensionMap
+    atom.config.setDefaults @cfg.scope, @defaultScopeMap
+    atom.config.observe @cfg.ext, =>
+      @extensionMap = atom.config.get(@cfg.ext)
+    atom.config.observe @cfg.scope, =>
+      @scopeMap = atom.config.get(@cfg.scope)
     atom.workspaceView.command 'runner:run', => @run()
     atom.workspaceView.command 'runner:stop', => @stop()
 
   run: ->
-    @loadConfig()
     editor = atom.workspace.getActiveEditor()
     return unless editor?
 
@@ -80,15 +95,6 @@ module.exports =
     @child.stdin.end()
     @runnerView.footer('Running: ' + cmd + ' ' + editor.getPath())
 
-  loadConfig: ->
-    @scopeMap = atom.config.get('runner.scopes')
-    unless @scopeMap?
-      @scopeMap = atom.config.set('runner.scopes', @defaultScopeMap)
-
-    @extensionMap = atom.config.get('runner.extensions')
-    unless @extensionMap?
-      @extensionMap = atom.config.set('runner.extensions', @defaultExtensionMap)
-
   commandFor: (editor) ->
     # try to lookup by extension
     if editor.getPath()?
@@ -101,3 +107,5 @@ module.exports =
     for name in Object.keys(@scopeMap)
       if scope.match('^source\\.' + name + '\\b')
         return @scopeMap[name]
+
+module.exports = new AtomRunner
