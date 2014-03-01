@@ -24,7 +24,7 @@ This package adds the following default configuration data to your
     'ruby': 'ruby'
     'python': 'python'
   'extensions':
-    'spec.coffee': 'jasmine-node'
+    'spec.coffee': 'jasmine-node --coffee'
 ```
 
 You can add more commands for a given language scope, or add commands by

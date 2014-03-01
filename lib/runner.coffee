@@ -9,7 +9,7 @@ module.exports =
   scopeMap: null
 
   defaultExtensionMap:
-    'spec.coffee': 'jasmine-node'
+    'spec.coffee': 'jasmine-node --coffee'
 
   defaultScopeMap:
     coffee: 'coffee'
