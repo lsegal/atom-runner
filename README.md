@@ -13,8 +13,7 @@ can add more.
 
 ## Configuring
 
-This package adds the following default configuration data to your
-`~/.atom/config.cson`:
+This package uses the following default configuration:
 
 ```cson
 'runner':
@@ -23,6 +22,7 @@ This package adds the following default configuration data to your
     'js': 'node'
     'ruby': 'ruby'
     'python': 'python'
+    'go': 'go run'
   'extensions':
     'spec.coffee': 'jasmine-node --coffee'
 ```
@@ -30,6 +30,9 @@ This package adds the following default configuration data to your
 You can add more commands for a given language scope, or add commands by
 extension instead (if multiple extensions use the same syntax). Extensions
 are searched before scopes (syntaxes).
+
+To do so, add the configuration to `~/.atom/config.cson` in the format provided
+above.
 
 The mapping is `SCOPE|EXT => EXECUTABLE`, so to run JavaScript files through
 phantom, you would do:
