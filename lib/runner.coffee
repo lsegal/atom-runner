@@ -18,12 +18,12 @@ module.exports =
     python: 'python'
 
   activate: ->
-    @loadConfig()
     @runnerView = null
     atom.workspaceView.command 'runner:run', => @run()
     atom.workspaceView.command 'runner:stop', => @stop()
 
   run: ->
+    @loadConfig()
     editor = atom.workspace.getActiveEditor()
     return unless editor?
 
