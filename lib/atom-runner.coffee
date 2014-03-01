@@ -19,6 +19,7 @@ class AtomRunner
     js: 'node'
     ruby: 'ruby'
     python: 'python'
+    go: 'go run'
 
   extensionMap: null
   scopeMap: null
