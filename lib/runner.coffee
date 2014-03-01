@@ -60,6 +60,10 @@ module.exports =
     @runnerView.clear()
 
     args = if editor.getPath() then [editor.getPath()] else []
+    splitCmd = cmd.split(/\s+/)
+    if splitCmd.length > 1
+      cmd = splitCmd[0]
+      args = splitCmd.slice(1).concat(args)
     @child = spawn(cmd, args, cwd: atom.project.path)
     @child.stderr.on 'data', (data) =>
       @runnerView.append(data, 'stderr')
