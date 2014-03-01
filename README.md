@@ -4,6 +4,8 @@ This package will run various script files inside of Atom.
 It currently supports JavaScript, CoffeeScript, Ruby, and Python. You
 can add more.
 
+![Example](resources/screenshot-1.png)
+
 ## Using
 
 * Hit Cmd+R to launch the runner for the active window.
