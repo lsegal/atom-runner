@@ -59,7 +59,6 @@ class AtomRunner
     if @pane and @pane.isOnDom()
       @pane.activateItem(@runnerView)
     @execute(cmd, editor)
-    previousPane.activate()
 
   stop: ->
     if @child
