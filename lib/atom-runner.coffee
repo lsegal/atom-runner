@@ -60,7 +60,7 @@ class AtomRunner
     @runnerView.setTitle(editor.getTitle())
     if @pane and @pane.isOnDom()
       @pane.activateItem(@runnerView)
-    @execute(cmd, editor)
+    @execute(cmd, editor, 'env': env)
 
   stop: ->
     if @child
