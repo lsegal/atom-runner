@@ -70,7 +70,7 @@ class AtomRunner
   runnerView: null
   pane: null
 
-  execute: (cmd, editor) ->
+  execute: (cmd, editor, options) ->
     @stop()
     @runnerView.clear()
 
