@@ -45,6 +45,8 @@ class AtomRunner
 
     path = editor.getPath()
     cmd = @commandFor(editor)
+    env = @envFor(editor)
+
     unless cmd?
       console.warn("No registered executable for file '#{path}'")
       return
