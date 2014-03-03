@@ -108,4 +108,17 @@ class AtomRunner
       if scope.match('^source\\.' + name + '\\b')
         return @scopeMap[name]['cmd']
 
+  envFor: (editor) ->
+    # try to lookup by extension
+    if editor.getPath()?
+      for ext in Object.keys(@extensionMap)
+        if editor.getPath().match('\\.' + ext + '$')
+          return @extensionMap[ext]['env']
+
+    # lookup by grammar
+    scope = editor.getCursorScopes()[0]
+    for name in Object.keys(@scopeMap)
+      if scope.match('^source\\.' + name + '\\b')
+        return @scopeMap[name]['env']
+
 module.exports = new AtomRunner
