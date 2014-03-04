@@ -12,7 +12,8 @@ class AtomRunner
     scope: 'runner.scopes'
 
   defaultExtensionMap:
-    'spec.coffee': 'jasmine-node --coffee'
+    'spec.coffee': 'jasmine-node --coffee',
+    'sh' : 'bash -c'
 
   defaultScopeMap:
     coffee: 'coffee'
@@ -20,6 +21,7 @@ class AtomRunner
     ruby: 'ruby'
     python: 'python'
     go: 'go run'
+    'Shell Script (Bash)': 'bash -c'
 
   extensionMap: null
   scopeMap: null
