@@ -1,7 +1,7 @@
 {
   "name": "atom-runner",
   "main": "./lib/atom-runner",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Runs scripts inside of Atom.",
   "repository": "https://github.com/lsegal/atom-runner",
   "dependencies": {
