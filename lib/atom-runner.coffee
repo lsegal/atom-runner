@@ -100,7 +100,7 @@ class AtomRunner
   commandFor: (editor) ->
     # try to lookup by extension
     if editor.getPath()?
-      for ext in Object.keys(@extensionMap)
+      for ext in Object.keys(@extensionMap).sort((a,b) -> b.length - a.length)
         if editor.getPath().match('\\.' + ext + '$')
           return @extensionMap[ext]
 
