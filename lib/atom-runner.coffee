@@ -82,8 +82,10 @@ class AtomRunner
     @child = spawn(cmd, args, cwd: atom.project.path)
     @child.stderr.on 'data', (data) =>
       @runnerView.append(data, 'stderr')
+      @runnerView.scrollToBottom()
     @child.stdout.on 'data', (data) =>
       @runnerView.append(data, 'stdout')
+      @runnerView.scrollToBottom()
     @child.on 'close', (code, signal) =>
       @runnerView.footer('Exited with code=' + code + ' in ' +
         ((new Date - startTime) / 1000) + ' seconds')
