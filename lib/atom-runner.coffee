@@ -43,6 +43,7 @@ class AtomRunner
     editor = atom.workspace.getActiveEditor()
     return unless editor?
 
+    editor.save()
     path = editor.getPath()
     cmd = @commandFor(editor)
     unless cmd?
