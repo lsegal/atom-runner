@@ -45,6 +45,8 @@ class AtomRunner
 
     path = editor.getPath()
     cmd = @commandFor(editor)
+    env = @envFor(editor)
+
     unless cmd?
       console.warn("No registered executable for file '#{path}'")
       return
@@ -58,7 +60,7 @@ class AtomRunner
     @runnerView.setTitle(editor.getTitle())
     if @pane and @pane.isOnDom()
       @pane.activateItem(@runnerView)
-    @execute(cmd, editor)
+    @execute(cmd, editor, 'env': env)
 
   stop: ->
     if @child
@@ -70,16 +72,17 @@ class AtomRunner
   runnerView: null
   pane: null
 
-  execute: (cmd, editor) ->
+  execute: (cmd, editor, options) ->
     @stop()
     @runnerView.clear()
 
+    env = options['env'] || {}
     args = if editor.getPath() then [editor.getPath()] else []
     splitCmd = cmd.split(/\s+/)
     if splitCmd.length > 1
       cmd = splitCmd[0]
       args = splitCmd.slice(1).concat(args)
-    @child = spawn(cmd, args, cwd: atom.project.path)
+    @child = spawn(cmd, args, cwd: atom.project.path, env: env)
     @child.stderr.on 'data', (data) =>
       @runnerView.append(data, 'stderr')
       @runnerView.scrollToBottom()
@@ -102,12 +105,25 @@ class AtomRunner
     if editor.getPath()?
       for ext in Object.keys(@extensionMap).sort((a,b) -> b.length - a.length)
         if editor.getPath().match('\\.' + ext + '$')
-          return @extensionMap[ext]
+          return @extensionMap[ext]['cmd']
 
     # lookup by grammar
     scope = editor.getCursorScopes()[0]
     for name in Object.keys(@scopeMap)
       if scope.match('^source\\.' + name + '\\b')
-        return @scopeMap[name]
+        return @scopeMap[name]['cmd']
+
+  envFor: (editor) ->
+    # try to lookup by extension
+    if editor.getPath()?
+      for ext in Object.keys(@extensionMap)
+        if editor.getPath().match('\\.' + ext + '$')
+          return @extensionMap[ext]['env']
+
+    # lookup by grammar
+    scope = editor.getCursorScopes()[0]
+    for name in Object.keys(@scopeMap)
+      if scope.match('^source\\.' + name + '\\b')
+        return @scopeMap[name]['env']
 
 module.exports = new AtomRunner

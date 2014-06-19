@@ -18,11 +18,16 @@ This package uses the following default configuration:
 ```cson
 'runner':
   'scopes':
-    'coffee': 'coffee'
-    'js': 'node'
-    'ruby': 'ruby'
-    'python': 'python'
-    'go': 'go run'
+    'coffee':
+      'cmd': 'coffee'
+    'js':
+      'cmd': 'node'
+    'ruby':
+      'cmd': 'ruby'
+    'python':
+      'cmd': 'python'
+    'go':
+      'cmd': 'go run'
   'extensions':
     'spec.coffee': 'jasmine-node --coffee'
 ```
@@ -40,7 +45,8 @@ phantom, you would do:
 ```cson
 'runner':
   'scopes':
-    'js': 'phantom'
+    'js':
+      'cmd': 'phantom'
 ```
 
 Note that the `source.` prefix is ignored for syntax scope listings.
@@ -50,8 +56,23 @@ Similarly, in the extension map:
 ```cson
 'runner':
   'extensions':
-    'js': 'phantom'
+    'js':
+      'cmd': 'phantom'
 ```
+
+### Environments
+
+You can set `ENV` vars that will be set before scripts are run with the `env`
+key.
+
+
+```cson
+    'ruby':
+      'cmd': 'ruby'
+      'env':
+        'PATH': '/usr/local/rbenv/versions/2.0.0-p247/bin:$PATH'
+```
+
 
 Note that the `.` extension prefix is ignored for extension listings.
 
