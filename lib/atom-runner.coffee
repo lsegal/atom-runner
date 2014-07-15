@@ -74,7 +74,10 @@ class AtomRunner
     @stop()
     @runnerView.clear()
 
-    args = if editor.getPath() then [editor.getPath()] else []
+    args = []
+    if editor.getPath()
+      editor.save()
+      args.push(editor.getPath())
     splitCmd = cmd.split(/\s+/)
     if splitCmd.length > 1
       cmd = splitCmd[0]
