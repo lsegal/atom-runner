@@ -3,6 +3,7 @@
 spawn = require('child_process').spawn
 fs = require('fs')
 url = require('url')
+p = require('path')
 
 AtomRunnerView = require './atom-runner-view'
 
@@ -82,7 +83,7 @@ class AtomRunner
     if splitCmd.length > 1
       cmd = splitCmd[0]
       args = splitCmd.slice(1).concat(args)
-    @child = spawn(cmd, args, cwd: atom.project.path)
+    @child = spawn(cmd, args, cwd: p.dirname(atom.project.path))
     @child.stderr.on 'data', (data) =>
       @runnerView.append(data, 'stderr')
       @runnerView.scrollToBottom()
