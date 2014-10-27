@@ -8,7 +8,7 @@ can add more.
 
 ## Using
 
-* Hit Cmd+R to launch the runner for the active window.
+* Hit Ctrl+R to launch the runner for the active window.
 * Hit Ctrl+C to kill a currently running process.
 
 ## Configuring
