@@ -12,3 +12,9 @@
 
 '.platform-darwin .workspace':
   'ctrl-c': 'runner:stop'
+
+'.platform-linux .workspace .editor':
+  'ctrl-shift-x': 'runner:run'
+
+'.platform-linux .workspace':
+  'ctrl-shift-z': 'runner:stop'
