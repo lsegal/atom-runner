@@ -84,7 +84,10 @@ class AtomRunner
       cmd = splitCmd[0]
       args = splitCmd.slice(1).concat(args)
     try
-      @child = spawn(cmd, args, cwd: p.dirname(atom.project.path))
+      dir = atom.project.path
+      if not fs.statSync(dir).isDirectory()
+        dir = p.dirname(dir)
+      @child = spawn(cmd, args, cwd: dir)
       @child.on 'error', (err) =>
         @runnerView.append(err.stack, 'stderr')
         @runnerView.scrollToBottom()
