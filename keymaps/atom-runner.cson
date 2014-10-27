@@ -7,7 +7,7 @@
 
 # For more detailed documentation see
 # https://atom.io/docs/latest/advanced/keymaps
-'.editor .platform-darwin':
+'.platform-darwin .editor':
   'ctrl-r': 'atom-runner:run'
 
 '.platform-win32 .editor, .platform-linux .editor':
