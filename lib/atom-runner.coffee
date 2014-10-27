@@ -36,8 +36,8 @@ class AtomRunner
       @extensionMap = atom.config.get(@cfg.ext)
     atom.config.observe @cfg.scope, =>
       @scopeMap = atom.config.get(@cfg.scope)
-    atom.workspaceView.command 'runner:run', => @run()
-    atom.workspaceView.command 'runner:stop', => @stop()
+    atom.workspaceView.command 'atom-runner:run', => @run()
+    atom.workspaceView.command 'atom-runner:stop', => @stop()
 
   run: ->
     editor = atom.workspace.getActiveEditor()

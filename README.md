@@ -8,8 +8,8 @@ can add more.
 
 ## Using
 
-* Hit Ctrl+R to launch the runner for the active window.
-* Hit Ctrl+C to kill a currently running process.
+* Hit Ctrl+R (Alt+R on Win/Linux) to launch the runner for the active window.
+* Hit Ctrl+Shift+C to kill a currently running process.
 
 ## Configuring
 

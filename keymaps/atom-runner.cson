@@ -7,8 +7,11 @@
 
 # For more detailed documentation see
 # https://atom.io/docs/latest/advanced/keymaps
-'.platform-darwin .workspace .editor':
-  'ctrl-r': 'runner:run'
+'.editor .platform-darwin':
+  'ctrl-r': 'atom-runner:run'
 
-'.platform-darwin .workspace':
-  'ctrl-c': 'runner:stop'
+'.platform-win32 .editor, .platform-linux .editor':
+  'alt-r': 'atom-runner:run'
+
+'.atom-runner':
+  'ctrl-shift-c': 'atom-runner:stop'
