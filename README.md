@@ -4,7 +4,7 @@ This package will run various script files inside of Atom.
 It currently supports JavaScript, CoffeeScript, Ruby, Python, and Go. You
 can add more.
 
-![Example](http://github.com/lsegal/atom-runner/raw/master/resources/screenshot-1.png)
+![Example](https://raw.githubusercontent.com/lsegal/atom-runner/master/resources/screenshot-1.png)
 
 ## Using
 
