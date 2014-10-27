@@ -82,17 +82,22 @@ class AtomRunner
     if splitCmd.length > 1
       cmd = splitCmd[0]
       args = splitCmd.slice(1).concat(args)
-    @child = spawn(cmd, args, cwd: atom.project.path)
-    @child.stderr.on 'data', (data) =>
-      @runnerView.append(data, 'stderr')
-      @runnerView.scrollToBottom()
-    @child.stdout.on 'data', (data) =>
-      @runnerView.append(data, 'stdout')
-      @runnerView.scrollToBottom()
-    @child.on 'close', (code, signal) =>
-      @runnerView.footer('Exited with code=' + code + ' in ' +
-        ((new Date - startTime) / 1000) + ' seconds')
-      @child = null
+    try
+      @child = spawn(cmd, args, cwd: pathmod.dirname(atom.project.path))
+      @child.on 'error', (err) =>
+        @runnerView.append(err.stack, 'stderr')
+        @runnerView.scrollToBottom()
+        @child = null
+      @child.stderr.on 'data', (data) =>
+        @runnerView.append(data, 'stderr')
+        @runnerView.scrollToBottom()
+      @child.stdout.on 'data', (data) =>
+        @runnerView.append(data, 'stdout')
+        @runnerView.scrollToBottom()
+      @child.on 'close', (code, signal) =>
+        @runnerView.footer('Exited with code=' + code + ' in ' +
+          ((new Date - startTime) / 1000) + ' seconds')
+        @child = null
 
     startTime = new Date
     unless editor.getPath()?
