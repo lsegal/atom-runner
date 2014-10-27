@@ -13,5 +13,5 @@
 '.platform-win32 .editor, .platform-linux .editor':
   'alt-r': 'atom-runner:run'
 
-'.atom-runner':
-  'ctrl-shift-c': 'atom-runner:stop'
+'.workspace':
+  'shift-ctrl-c': 'atom-runner:stop'
