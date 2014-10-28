@@ -13,7 +13,7 @@ class AtomRunner
     scope: 'runner.scopes'
 
   defaultExtensionMap:
-    'spec.coffee': 'jasmine-node --coffee'
+    'spec.coffee': 'mocha'
 
   defaultScopeMap:
     coffee: 'coffee'
