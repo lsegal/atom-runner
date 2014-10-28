@@ -12,13 +12,17 @@ class AtomRunnerView extends ScrollView
     view
 
   @content: ->
-    @div class: 'atom-runner', =>
+    @div class: 'atom-runner', tabindex: -1, =>
       @h1 'Atom Runner'
       @pre class: 'output'
       @div class: 'footer'
 
   constructor: (title) ->
     super
+
+    @command 'run:copy', =>
+      atom.clipboard.write(window.getSelection().toString())
+
     @_output = @find('.output')
     @_footer = @find('.footer')
     @setTitle(title)

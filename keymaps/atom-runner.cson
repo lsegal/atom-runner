@@ -13,5 +13,11 @@
 '.platform-win32 .editor, .platform-linux .editor':
   'alt-r': 'atom-runner:run'
 
+'.platform-darwin .atom-runner':
+  'cmd-c': 'run:copy'
+
+'.platform-win32 .runner, .platform-linux .atom-runner':
+  'ctrl-c': 'run:copy'
+
 '.workspace':
   'shift-ctrl-c': 'atom-runner:stop'
