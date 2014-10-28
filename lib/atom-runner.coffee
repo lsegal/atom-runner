@@ -84,7 +84,7 @@ class AtomRunner
       cmd = splitCmd[0]
       args = splitCmd.slice(1).concat(args)
     try
-      dir = atom.project.path
+      dir = atom.project.path || '.'
       if not fs.statSync(dir).isDirectory()
         dir = p.dirname(dir)
       @child = spawn(cmd, args, cwd: dir)
