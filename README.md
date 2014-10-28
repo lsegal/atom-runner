@@ -25,7 +25,7 @@ This package uses the following default configuration:
     'python': 'python'
     'go': 'go run'
   'extensions':
-    'spec.coffee': 'jasmine-node --coffee'
+    'spec.coffee': 'mocha'
 ```
 
 You can add more commands for a given language scope, or add commands by
