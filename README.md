@@ -12,6 +12,13 @@ scripts. You can add more!
 * Hit Ctrl+Shift+C to kill a currently running process.
 * Hit Escape to close the runner window.
 
+## Features
+
+* A docked runner window with ANSI support and ESC keybinding to close.
+* PATH and environment variable detection on OSX.
+* Shebang executable detection for shell source files.
+* Configurable commands based on file scope or filename matches.
+
 ## Configuring
 
 This package uses the following default configuration:
@@ -28,6 +35,9 @@ This package uses the following default configuration:
   'extensions':
     'spec.coffee': 'mocha'
 ```
+
+**Note**: the 'shell' scope also supports shebang line detection. If a shebang
+          is detected, that line will supersede the default registered command.
 
 You can add more commands for a given language scope, or add commands by
 extension instead (if multiple extensions use the same syntax). Extensions
