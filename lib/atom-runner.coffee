@@ -25,11 +25,29 @@ class AtomRunner
   extensionMap: null
   scopeMap: null
 
+  debug: (args...) ->
+    console.debug('[atom-runner]', args...)
+
+  initEnv: ->
+    if process.platform == 'darwin'
+      [shell, out] = [process.env.SHELL || 'bash', '']
+      @debug('Importing ENV from', shell)
+      pid = spawn(shell, ['--login', '-c', 'env'])
+      pid.stdout.on 'data', (chunk) -> out += chunk
+      pid.on 'error', =>
+        @debug('Failed to import ENV from', shell)
+      pid.on 'close', =>
+        for line in out.split('\n')
+          match = line.match(/^(\S+?)=(.+)/)
+          process.env[match[1]] = match[2] if match
+      pid.stdin.end()
+
   destroy: ->
     atom.config.unobserve @cfg.ext
     atom.config.unobserve @cfg.scope
 
   activate: ->
+    @initEnv()
     @runnerView = null
     atom.config.setDefaults @cfg.ext, @defaultExtensionMap
     atom.config.setDefaults @cfg.scope, @defaultScopeMap
