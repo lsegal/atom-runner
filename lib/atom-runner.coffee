@@ -21,6 +21,7 @@ class AtomRunner
     ruby: 'ruby'
     python: 'python'
     go: 'go run'
+    shell: 'bash'
 
   extensionMap: null
   scopeMap: null
@@ -146,7 +147,14 @@ class AtomRunner
     scope = editor.getCursorScopes()[0]
     for name in Object.keys(@scopeMap)
       if scope.match('^source\\.' + name + '\\b')
-        return @scopeMap[name]
+        if name == 'shell'
+          return @commandForShell(editor, @scopeMap[name])
+        else
+          return @scopeMap[name]
+
+  commandForShell: (editor, defaultShell) ->
+    match = editor.getText().match(/^#!\s*(.+)/)
+    match and match[1] or defaultShell
 
   runnerView: ->
     for pane in atom.workspaceView.getPaneViews()
