@@ -154,7 +154,7 @@ class AtomRunner
         return @scopeMap[name]
 
   commandForShebang: (editor) ->
-    match = editor.getText().match(/^#!\s*(.+)/)
+    match = editor.lineForBufferRow(0).match(/^#!\s*(.+)/)
     match and match[1]
 
   runnerView: ->
