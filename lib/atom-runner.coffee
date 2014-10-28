@@ -137,6 +137,10 @@ class AtomRunner
     view.footer('Running: ' + cmd + ' ' + editor.getPath())
 
   commandFor: (editor) ->
+    # try to find a shebang
+    shebang = @commandForShebang(editor)
+    return shebang if shebang?
+
     # try to lookup by extension
     if editor.getPath()?
       for ext in Object.keys(@extensionMap).sort((a,b) -> b.length - a.length)
@@ -147,14 +151,11 @@ class AtomRunner
     scope = editor.getCursorScopes()[0]
     for name in Object.keys(@scopeMap)
       if scope.match('^source\\.' + name + '\\b')
-        if name == 'shell'
-          return @commandForShell(editor, @scopeMap[name])
-        else
-          return @scopeMap[name]
+        return @scopeMap[name]
 
-  commandForShell: (editor, defaultShell) ->
+  commandForShebang: (editor) ->
     match = editor.getText().match(/^#!\s*(.+)/)
-    match and match[1] or defaultShell
+    match and match[1]
 
   runnerView: ->
     for pane in atom.workspaceView.getPaneViews()

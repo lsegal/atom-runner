@@ -16,7 +16,7 @@ scripts. You can add more!
 
 * A docked runner window with ANSI support and ESC keybinding to close.
 * PATH and environment variable detection on OSX.
-* Shebang executable detection for shell source files.
+* Shebang executable detection in all source files.
 * Configurable commands based on file scope or filename matches.
 
 ## Configuring
@@ -36,8 +36,8 @@ This package uses the following default configuration:
     'spec.coffee': 'mocha'
 ```
 
-**Note**: the 'shell' scope also supports shebang line detection. If a shebang
-          is detected, that line will supersede the default registered command.
+**Note**: If a shebang is detected, that line will supersede the
+          default registered command.
 
 You can add more commands for a given language scope, or add commands by
 extension instead (if multiple extensions use the same syntax). Extensions
