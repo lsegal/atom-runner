@@ -102,6 +102,10 @@ class AtomRunner
         @runnerView.footer('Exited with code=' + code + ' in ' +
           ((new Date - startTime) / 1000) + ' seconds')
         @child = null
+    catch err
+      @runnerView.append(err.stack, 'stderr')
+      @runnerView.scrollToBottom()
+      @stop()
 
     startTime = new Date
     unless editor.getPath()?
