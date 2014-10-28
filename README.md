@@ -18,6 +18,7 @@ scripts. You can add more!
 * PATH and environment variable detection on OSX.
 * Shebang executable detection in all source files.
 * Configurable commands based on file scope or filename matches.
+* Execute unsaved file buffers!
 
 ## Configuring
 
