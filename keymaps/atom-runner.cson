@@ -9,9 +9,11 @@
 # https://atom.io/docs/latest/advanced/keymaps
 '.platform-darwin .editor':
   'ctrl-r': 'run:file'
+  'ctrl-shift-r': 'run:selection'
 
 '.platform-win32 .editor, .platform-linux .editor':
   'alt-r': 'run:file'
+  'alt-shift-r': 'run:selection'
 
 '.platform-darwin .atom-runner':
   'cmd-c': 'run:copy'

@@ -55,11 +55,12 @@ class AtomRunner
       @extensionMap = atom.config.get(@cfg.ext)
     atom.config.observe @cfg.scope, =>
       @scopeMap = atom.config.get(@cfg.scope)
-    atom.workspaceView.command 'run:file', => @run()
+    atom.workspaceView.command 'run:file', => @run(false)
+    atom.workspaceView.command 'run:selection', => @run(true)
     atom.workspaceView.command 'run:stop', => @stop()
     atom.workspaceView.command 'run:close', => @stopAndClose()
 
-  run: ->
+  run: (selection) ->
     editor = atom.workspace.getActiveEditor()
     return unless editor?
 
@@ -77,7 +78,7 @@ class AtomRunner
 
     view.setTitle(editor.getTitle())
     pane.activateItem(view)
-    @execute(cmd, editor, view)
+    @execute(cmd, editor, view, selection)
 
   stop: (view) ->
     if @child
@@ -86,22 +87,23 @@ class AtomRunner
         view.append('^C', 'stdin')
       else
         @debug('Killed child', child.pid)
-      @child.kill()
-      @child = null
+      @child.kill('SIGINT')
+      if @child.killed
+        @child = null
 
   stopAndClose: ->
     {pane, view} = @runnerView()
     pane?.removeItem(view)
     @stop(view)
 
-  execute: (cmd, editor, view) ->
+  execute: (cmd, editor, view, selection) ->
     view.clear()
     @stop()
 
     args = []
     if editor.getPath()
       editor.save()
-      args.push(editor.getPath())
+      args.push(editor.getPath()) if !selection
     splitCmd = cmd.split(/\s+/)
     if splitCmd.length > 1
       cmd = splitCmd[0]
@@ -131,7 +133,9 @@ class AtomRunner
       @stop()
 
     startTime = new Date
-    unless editor.getPath()?
+    if selection
+      @child.stdin.write(editor.getSelection().getText())
+    else if !editor.getPath()
       @child.stdin.write(editor.getText())
     @child.stdin.end()
     view.footer('Running: ' + cmd + ' ' + editor.getPath())
