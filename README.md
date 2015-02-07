@@ -29,18 +29,22 @@ This package uses the following default configuration:
 ```cson
 'runner':
   'scopes':
-    'coffee': 'coffee'
-    'js': 'node'
-    'ruby': 'ruby'
-    'python': 'python'
-    'go': 'go run'
-    'shell': 'bash'
+    'coffee': 'coffee {file_path}'
+    'js': 'node {file_path}'
+    'ruby': 'ruby {file_path}'
+    'python': 'python {file_path}'
+    'go': 'go run {file_path}'
+    'shell': 'bash {file_path}'
   'extensions':
     'spec.coffee': 'mocha'
 ```
 
 **Note**: If a shebang is detected, that line will supersede the
           default registered command.
+
+The variable `{file_path}` is used to replace the current file path in the
+command. If it is not given (e.g. `'js': 'npm test'`) it will not be embedded
+such path on the command, so the custom command will be run.
 
 You can add more commands for a given language scope, or add commands by
 extension instead (if multiple extensions use the same syntax). Extensions
