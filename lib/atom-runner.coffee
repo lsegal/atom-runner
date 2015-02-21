@@ -55,10 +55,10 @@ class AtomRunner
       @extensionMap = atom.config.get(@cfg.ext)
     atom.config.observe @cfg.scope, =>
       @scopeMap = atom.config.get(@cfg.scope)
-    atom.workspaceView.command 'run:file', => @run(false)
-    atom.workspaceView.command 'run:selection', => @run(true)
-    atom.workspaceView.command 'run:stop', => @stop()
-    atom.workspaceView.command 'run:close', => @stopAndClose()
+    atom.commands.add 'atom-workspace', 'run:file', => @run(false)
+    atom.commands.add 'atom-workspace', 'run:selection', => @run(true)
+    atom.commands.add 'atom-workspace', 'run:stop', => @stop()
+    atom.commands.add 'atom-workspace', 'run:close', =>@stopAndClose()
 
   run: (selection) ->
     editor = atom.workspace.getActiveEditor()
@@ -73,7 +73,7 @@ class AtomRunner
     {pane, view} = @runnerView()
     if not view?
       view = new AtomRunnerView(editor.getTitle())
-      panes = atom.workspaceView.getPaneViews()
+      panes = atom.workspace.getPanes()
       pane = panes[panes.length - 1].splitRight(view)
 
     view.setTitle(editor.getTitle())
@@ -162,7 +162,7 @@ class AtomRunner
     match and match[1]
 
   runnerView: ->
-    for pane in atom.workspaceView.getPaneViews()
+    for pane in atom.workspace.getPanes()
       for view in pane.getItems()
         return {pane: pane, view: view} if view instanceof AtomRunnerView
     {pane: null, view: null}
