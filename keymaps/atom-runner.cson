@@ -7,11 +7,11 @@
 
 # For more detailed documentation see
 # https://atom.io/docs/latest/advanced/keymaps
-'.platform-darwin .editor':
+'.platform-darwin atom-text-editor':
   'ctrl-r': 'run:file'
   'ctrl-shift-r': 'run:selection'
 
-'.platform-win32 .editor, .platform-linux .editor':
+'.platform-win32 atom-text-editor, .platform-linux atom-text-editor':
   'alt-r': 'run:file'
   'alt-shift-r': 'run:selection'
 
@@ -21,7 +21,7 @@
 '.platform-win32 .runner, .platform-linux .atom-runner':
   'ctrl-c': 'run:copy'
 
-'.workspace':
+'.atom-workspace':
   'shift-ctrl-c': 'run:stop'
 
 '.atom-runner':
