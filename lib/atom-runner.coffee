@@ -14,7 +14,7 @@ class AtomRunner
 
   defaultExtensionMap:
     'spec.coffee': 'mocha'
-    'ps1': 'c:\\windows\\sysnative\\windowspowershell\\v1.0\\powershell.exe â€“file'
+    'ps1': 'c:\\windows\\sysnative\\windowspowershell\\v1.0\\powershell.exe –file'
 
   defaultScopeMap:
     coffee: 'coffee'
@@ -67,7 +67,7 @@ class AtomRunner
     return unless editor?
 
     path = editor.getPath()
-    cmd = @commandFor(editor)
+    cmd = @commandFor(editor, selection)
     unless cmd?
       console.warn("No registered executable for file '#{path}'")
       return
@@ -142,16 +142,18 @@ class AtomRunner
     @child.stdin.end()
     view.footer('Running: ' + cmd + ' ' + editor.getPath())
 
-  commandFor: (editor) ->
+  commandFor: (editor, selection) ->
     # try to find a shebang
     shebang = @commandForShebang(editor)
     return shebang if shebang?
 
-    # try to lookup by extension
-    if editor.getPath()?
-      for ext in Object.keys(@extensionMap).sort((a,b) -> b.length - a.length)
-        if editor.getPath().match('\\.' + ext + '$')
-          return @extensionMap[ext]
+    # Don't lookup by extension from selection.
+    if (!selection)
+      # try to lookup by extension
+      if editor.getPath()?
+        for ext in Object.keys(@extensionMap).sort((a,b) -> b.length - a.length)
+          if editor.getPath().match('\\.' + ext + '$')
+            return @extensionMap[ext]
 
     # lookup by grammar
     scope = editor.getCursorScopes()[0]
