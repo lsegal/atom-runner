@@ -1,7 +1,7 @@
 # Atom Runner
 
 This package will run various script files inside of Atom.
-It currently supports JavaScript, CoffeeScript, Ruby, Python, Go, and Bash
+It currently supports JavaScript, CoffeeScript, Ruby, Python, Go, Bash and PowerShell
 scripts. You can add more!
 
 ![Example](https://raw.githubusercontent.com/lsegal/atom-runner/master/resources/screenshot-1.png)
@@ -35,8 +35,10 @@ This package uses the following default configuration:
     'python': 'python'
     'go': 'go run'
     'shell': 'bash'
+    'powershell': 'c:\\windows\\sysnative\\windowspowershell\\v1.0\\powershell.exe -noninteractive -noprofile -c -'
   'extensions':
     'spec.coffee': 'mocha'
+    'ps1': 'c:\\windows\\sysnative\\windowspowershell\\v1.0\\powershell.exe –file'
 ```
 
 **Note**: If a shebang is detected, that line will supersede the
