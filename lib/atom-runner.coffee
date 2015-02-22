@@ -16,12 +16,12 @@ class AtomRunner
     'spec.coffee': 'mocha'
 
   defaultScopeMap:
-    coffee: 'coffee'
-    js: 'node'
-    ruby: 'ruby'
-    python: 'python'
-    go: 'go run'
-    shell: 'bash'
+    coffee: 'coffee {file_path}'
+    js: 'node {file_path}'
+    ruby: 'ruby {file_path}'
+    python: 'python {file_path}'
+    go: 'go run {file_path}'
+    shell: 'bash {file_path}'
 
   extensionMap: null
   scopeMap: null
@@ -100,14 +100,19 @@ class AtomRunner
     view.clear()
     @stop()
 
-    args = []
     if editor.getPath()
       editor.save()
-      args.push(editor.getPath()) if !selection
+    args = []
     splitCmd = cmd.split(/\s+/)
     if splitCmd.length > 1
       cmd = splitCmd[0]
-      args = splitCmd.slice(1).concat(args)
+      args = splitCmd.slice(1)
+      file_path_index = args.indexOf('{file_path}')
+      if file_path_index > -1
+        args[file_path_index] = if !selection
+          editor.getPath()
+        else
+          ''
     try
       dir = atom.project.path || '.'
       if not fs.statSync(dir).isDirectory()
