@@ -13,6 +13,7 @@ class AtomRunnerView extends ScrollView
 
   @content: ->
     @div class: 'atom-runner', tabindex: -1, =>
+      @h1 'Atom Runner'
       @pre class: 'output'
       @div class: 'footer'
 
@@ -36,6 +37,7 @@ class AtomRunnerView extends ScrollView
     "Atom Runner: #{@title}"
 
   setTitle: (title) ->
+    @find('h1').html(@getTitle())
     @title = title
 
   clear: ->
