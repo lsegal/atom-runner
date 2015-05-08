@@ -14,7 +14,7 @@ class AtomRunner
 
   defaultExtensionMap:
     'spec.coffee': 'mocha'
-    'ps1': 'c:\\windows\\sysnative\\windowspowershell\\v1.0\\powershell.exe –file'
+    'ps1': 'c:\\windows\\sysnative\\windowspowershell\\v1.0\\powershell.exe -file'
 
   defaultScopeMap:
     coffee: 'coffee'
