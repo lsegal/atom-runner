@@ -1,4 +1,4 @@
-{ScrollView} = require 'atom'
+{ScrollView} = require 'atom-space-pen-views'
 AnsiToHtml = require 'ansi-to-html'
 
 module.exports =

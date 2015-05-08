@@ -5,7 +5,8 @@
   "description": "Runs scripts inside of Atom.",
   "repository": "https://github.com/lsegal/atom-runner",
   "dependencies": {
-    "ansi-to-html": "0.1.x"
+    "ansi-to-html": "0.1.x",
+    "atom-space-pen-views": "^2.0.3"
   },
   "license": "MIT"
 }
