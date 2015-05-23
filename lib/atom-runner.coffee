@@ -156,7 +156,7 @@ class AtomRunner
             return @extensionMap[ext]
 
     # lookup by grammar
-    scope = editor.getCursorScopes()[0]
+    scope = editor.getLastCursor().getScopeDescriptor().scopes[0]
     for name in Object.keys(@scopeMap)
       if scope.match('^source\\.' + name + '\\b')
         return @scopeMap[name]
