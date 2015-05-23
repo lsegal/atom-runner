@@ -63,7 +63,7 @@ class AtomRunner
     atom.commands.add 'atom-workspace', 'run:close', =>@stopAndClose()
 
   run: (selection) ->
-    editor = atom.workspace.getActiveEditor()
+    editor = atom.workspace.getActiveTextEditor()
     return unless editor?
 
     path = editor.getPath()
@@ -162,7 +162,7 @@ class AtomRunner
         return @scopeMap[name]
 
   commandForShebang: (editor) ->
-    match = editor.lineForBufferRow(0).match(/^#!\s*(.+)/)
+    match = editor.lineTextForBufferRow(0).match(/^#!\s*(.+)/)
     match and match[1]
 
   runnerView: ->
