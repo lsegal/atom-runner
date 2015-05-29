@@ -60,7 +60,9 @@ class AtomRunner
     atom.commands.add 'atom-workspace', 'run:file', => @run(false)
     atom.commands.add 'atom-workspace', 'run:selection', => @run(true)
     atom.commands.add 'atom-workspace', 'run:stop', => @stop()
-    atom.commands.add 'atom-workspace', 'run:close', =>@stopAndClose()
+    atom.commands.add 'atom-workspace', 'run:close', => @stopAndClose()
+    atom.commands.add '.atom-runner', 'run:copy', =>
+      atom.clipboard.write(window.getSelection().toString())
 
   run: (selection) ->
     editor = atom.workspace.getActiveTextEditor()

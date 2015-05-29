@@ -5,23 +5,21 @@
 @import "ui-variables";
 
 .atom-runner {
-  background: @tool-panel-background-color;
+  background: #fff;
+  padding: @component-padding;
 
   overflow-y: scroll;
   color: @text-color;
 
   pre {
     background-color: @tool-panel-background-color;
+    padding: (@component-padding + 5);
 
     .stderr { color: @text-color-error; }
   }
 
   .footer {
     color: @text-color;
-    margin-left: 10px;
-    margin-bottom: 10px;
-  }
-  h1 {
-    margin-left: 10px;
+    padding-top: (@component-padding + 5);
   }
 }

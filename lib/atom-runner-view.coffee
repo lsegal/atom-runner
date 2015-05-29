@@ -1,4 +1,4 @@
-{ScrollView} = require 'atom'
+{ScrollView} = require 'atom-space-pen-views'
 AnsiToHtml = require 'ansi-to-html'
 
 module.exports =
@@ -20,9 +20,6 @@ class AtomRunnerView extends ScrollView
   constructor: (title) ->
     super
 
-    @command 'run:copy', =>
-      atom.clipboard.write(window.getSelection().toString())
-
     @_output = @find('.output')
     @_footer = @find('.footer')
     @setTitle(title)
@@ -37,8 +34,8 @@ class AtomRunnerView extends ScrollView
     "Atom Runner: #{@title}"
 
   setTitle: (title) ->
-    @find('h1').html(@getTitle())
     @title = title
+    @find('h1').html(@getTitle())
 
   clear: ->
     @_output.html('')
