@@ -63,7 +63,7 @@ class AtomRunner
     atom.commands.add 'atom-workspace', 'run:close', =>@stopAndClose()
 
   run: (selection) ->
-    editor = atom.workspace.getActiveEditor()
+    editor = atom.workspace.getActiveTextEditor()
     return unless editor?
 
     path = editor.getPath()
@@ -156,13 +156,13 @@ class AtomRunner
             return @extensionMap[ext]
 
     # lookup by grammar
-    scope = editor.getCursorScopes()[0]
+    scope = editor.getLastCursor().getScopeDescriptor().scopes[0]
     for name in Object.keys(@scopeMap)
       if scope.match('^source\\.' + name + '\\b')
         return @scopeMap[name]
 
   commandForShebang: (editor) ->
-    match = editor.lineForBufferRow(0).match(/^#!\s*(.+)/)
+    match = editor.lineTextForBufferRow(0).match(/^#!\s*(.+)/)
     match and match[1]
 
   runnerView: ->
