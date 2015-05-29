@@ -34,8 +34,8 @@ class AtomRunnerView extends ScrollView
     "Atom Runner: #{@title}"
 
   setTitle: (title) ->
-    @find('h1').html(@getTitle())
     @title = title
+    @find('h1').html(@getTitle())
 
   clear: ->
     @_output.html('')
