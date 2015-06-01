@@ -15,6 +15,7 @@ class AtomRunner
   defaultExtensionMap:
     'spec.coffee': 'mocha'
     'ps1': 'c:\\windows\\sysnative\\windowspowershell\\v1.0\\powershell.exe -file'
+    '_test.go': 'go test'
 
   defaultScopeMap:
     coffee: 'coffee'
