@@ -154,7 +154,8 @@ class AtomRunner
       # try to lookup by extension
       if editor.getPath()?
         for ext in Object.keys(@extensionMap).sort((a,b) -> b.length - a.length)
-          if editor.getPath().match('\\.' + ext + '$')
+          boundary = if ext.match(/^\b/) then '' else '\\b'
+          if editor.getPath().match(boundary + ext + '$')
             return @extensionMap[ext]
 
     # lookup by grammar
