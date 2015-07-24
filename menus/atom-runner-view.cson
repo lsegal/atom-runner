@@ -1,0 +1,5 @@
+'context-menu':
+  '.atom-runner': [
+    {label: 'Copy', command: 'run:copy'}
+    {type: 'separator'}
+  ]
