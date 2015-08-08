@@ -6,6 +6,12 @@ scripts. You can add more!
 
 ![Example](https://raw.githubusercontent.com/lsegal/atom-runner/master/resources/screenshot-1.png)
 
+## Installation
+
+Atom Runner can be installed with the help of `apm`. Just open a CLI and give the command:
+    
+    apm install atom-runner
+
 ## Using
 
 * Hit Ctrl+R (Alt+R on Win/Linux) to launch the runner for the active window.
