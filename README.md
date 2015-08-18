@@ -72,6 +72,19 @@ Similarly, in the extension map:
 
 Note that the `.` extension prefix is ignored for extension listings.
 
+## FAQ And Known Issues
+
+### 1. I keep getting `spawn node ENOENT` errors. Why?
+
+Atom-runner relies on your `PATH` environment variable to run executables through your shell.
+In order to correctly run executables, they must be in your `PATH`. In Mac OS X systems,
+running Atom.app from the Launchpad or Dock will not source your `PATH` directory additions
+from your `~/.bashrc` or other shell profile files, and you are likely not loading your
+full set of paths into your environment. 
+
+In order to ensure that your `PATH` is correctly configured in OS X, it is recommended to
+load Atom only through an active terminal (i.e., the `atom` command).
+
 ## License & Copyright
 
 This package is Copyright (c) Loren Segal 2014 and is licensed under the MIT
