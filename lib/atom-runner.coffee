@@ -8,6 +8,14 @@ p = require('path')
 AtomRunnerView = require './atom-runner-view'
 
 class AtomRunner
+  config:
+    showOutputWindow:
+      title: 'Show Output Window'
+      description: 'Displays the output window when running commands. Uncheck to hide output.'
+      type: 'boolean'
+      default: true
+      order: 1
+
   cfg:
     ext: 'runner.extensions'
     scope: 'runner.scopes'
@@ -75,14 +83,28 @@ class AtomRunner
       console.warn("No registered executable for file '#{path}'")
       return
 
-    {pane, view} = @runnerView()
-    if not view?
-      view = new AtomRunnerView(editor.getTitle())
-      panes = atom.workspace.getPanes()
-      pane = panes[panes.length - 1].splitRight(view)
+    if atom.config.get('atom-runner.showOutputWindow')
+      {pane, view} = @runnerView()
+      if not view?
+        view = new AtomRunnerView(editor.getTitle())
+        panes = atom.workspace.getPanes()
+        pane = panes[panes.length - 1].splitRight(view)
+    else
+      view =
+        mocked: true
+        append: (text, type) ->
+          if type == 'stderr'
+            console.error(text)
+          else
+            console.log(text)
+        scrollToBottom: ->
+        clear: ->
+        footer: ->
 
-    view.setTitle(editor.getTitle())
-    pane.activateItem(view)
+    unless view.mocked
+      view.setTitle(editor.getTitle())
+      pane.activateItem(view)
+
     @execute(cmd, editor, view, selection)
 
   stop: (view) ->
