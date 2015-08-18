@@ -119,6 +119,10 @@ class AtomRunner
         dir = p.dirname(dir)
       @child = spawn(cmd, args, cwd: dir)
       @child.on 'error', (err) =>
+        if err.message.match(/\bENOENT$/)
+          view.append('Unable to find command: ' + cmd + '\n', 'stderr')
+          view.append('Are you sure PATH is configured correctly?\n\n', 'stderr')
+          view.append('ENV PATH: ' + process.env.PATH + '\n\n', 'stderr')
         view.append(err.stack, 'stderr')
         view.scrollToBottom()
         @child = null
