@@ -1,13 +1,19 @@
 {
   "name": "atom-runner",
   "main": "./lib/atom-runner",
-  "version": "2.4.3",
+  "version": "2.4.4",
   "description": "Runs scripts inside of Atom.",
   "repository": "https://github.com/lsegal/atom-runner",
   "dependencies": {
     "ansi-to-html": "0.1.x",
     "atom-space-pen-views": "^2.0.3"
   },
-  "activationEvents": ["run:file", "run:selection", "run:stop", "run:close", "run:copy"],
+  "activationEvents": [
+    "run:file",
+    "run:selection",
+    "run:stop",
+    "run:close",
+    "run:copy"
+  ],
   "license": "MIT"
 }
