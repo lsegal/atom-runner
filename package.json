@@ -8,12 +8,8 @@
     "ansi-to-html": "0.1.x",
     "atom-space-pen-views": "^2.0.3"
   },
-  "activationEvents": [
-    "run:file",
-    "run:selection",
-    "run:stop",
-    "run:close",
-    "run:copy"
-  ],
+  "activationCommands": {
+    "atom-text-editor": ["run:file", "run:selection", "run:stop", "run:close", "run:copy"]
+  },
   "license": "MIT"
 }
