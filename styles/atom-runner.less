@@ -5,14 +5,14 @@
 @import "ui-variables";
 
 .atom-runner {
-  background: #fff;
+  background: @pane-item-background-color;
   padding: @component-padding;
 
   overflow-y: scroll;
   color: @text-color;
 
   pre {
-    background-color: @tool-panel-background-color;
+    background-color: @pane-item-border-color;
     padding: (@component-padding + 5);
 
     .stderr { color: @text-color-error; }
