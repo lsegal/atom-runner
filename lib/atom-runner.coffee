@@ -165,7 +165,7 @@ class AtomRunner
 
     startTime = new Date
     if selection
-      @child.stdin.write(editor.getSelection().getText())
+      @child.stdin.write(editor.getLastSelection().getText())
     else if !editor.getPath()
       @child.stdin.write(editor.getText())
     @child.stdin.end()
