@@ -170,7 +170,7 @@ class AtomRunner
     else if !editor.getPath()
       @child.stdin.write(editor.getText())
     @child.stdin.end()
-    view.footer('Running: ' + cmd + ' ' + editor.getPath())
+    view.footer("Running: #{cmd} #{editor.getPath()} (pid #{@child.pid})")
 
   commandFor: (editor, selection) ->
     # try to find a shebang
