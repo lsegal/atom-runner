@@ -6,7 +6,8 @@
   "repository": "https://github.com/lsegal/atom-runner",
   "dependencies": {
     "ansi-to-html": "0.1.x",
-    "atom-space-pen-views": "^2.0.3"
+    "atom-space-pen-views": "^2.0.3",
+    "tree-kill": "1.0.0"
   },
   "activationCommands": {
     "atom-text-editor": [
