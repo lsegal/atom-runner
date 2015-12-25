@@ -124,8 +124,8 @@ class AtomRunner
     @stop(view)
 
   execute: (cmd, editor, view, selection) ->
-    view.clear()
     @stop()
+    view.clear()
 
     args = []
     if editor.getPath()
