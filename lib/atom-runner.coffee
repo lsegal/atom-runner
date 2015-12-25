@@ -140,6 +140,7 @@ class AtomRunner
       if not fs.statSync(dir).isDirectory()
         dir = p.dirname(dir)
       @child = spawn(cmd, args, cwd: dir)
+      currentPid = @child.pid
       @child.on 'error', (err) =>
         if err.message.match(/\bENOENT$/)
           view.append('Unable to find command: ' + cmd + '\n', 'stderr')
@@ -155,7 +156,7 @@ class AtomRunner
         view.append(data, 'stdout')
         view.scrollToBottom()
       @child.on 'close', (code, signal) =>
-        unless @child
+        if @child.pid == currentPid
           time = ((new Date - startTime) / 1000)
           view.footer("Exited with code=#{code} in #{time} seconds")
           view.scrollToBottom()
