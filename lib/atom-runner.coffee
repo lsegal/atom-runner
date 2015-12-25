@@ -157,6 +157,7 @@ class AtomRunner
       @child.on 'close', (code, signal) =>
         view.footer('Exited with code=' + code + ' in ' +
           ((new Date - startTime) / 1000) + ' seconds')
+        view.scrollToBottom()
         @child = null
     catch err
       view.append(err.stack, 'stderr')
