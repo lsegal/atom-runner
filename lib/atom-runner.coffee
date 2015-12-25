@@ -115,7 +115,7 @@ class AtomRunner
         view.append('^C', 'stdin')
       else
         @debug('Killed child', child.pid)
-      treekill(@child.pid, 'SIGINT')
+      treekill(@child.pid)
       if @child.killed
         @child = null
 
