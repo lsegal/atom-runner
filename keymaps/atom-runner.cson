@@ -18,10 +18,10 @@
 '.platform-darwin .atom-runner':
   'cmd-c': 'run:copy'
 
-'.platform-win32 .runner, .platform-linux .atom-runner':
+'.platform-win32 .atom-runner, .platform-linux .atom-runner':
   'ctrl-c': 'run:copy'
 
-'.atom-workspace':
+'atom-workspace':
   'shift-ctrl-c': 'run:stop'
 
 '.atom-runner':
