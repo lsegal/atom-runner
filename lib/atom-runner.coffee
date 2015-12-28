@@ -137,7 +137,10 @@ class AtomRunner
       args = splitCmd.slice(1).concat(args)
     try
       dir = atom.project.getPaths()[0] || '.'
-      if not fs.statSync(dir).isDirectory()
+      try
+        if not fs.statSync(dir).isDirectory()
+          throw new Error("Bad dir")
+      catch
         dir = p.dirname(dir)
       @child = spawn(cmd, args, cwd: dir)
       currentPid = @child.pid
