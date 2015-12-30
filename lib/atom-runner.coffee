@@ -125,8 +125,8 @@ class AtomRunner
     @stop(view)
 
   execute: (cmd, editor, view, selection) ->
-    view.clear()
     @stop()
+    view.clear()
 
     args = []
     if editor.getPath()
@@ -138,9 +138,13 @@ class AtomRunner
       args = splitCmd.slice(1).concat(args)
     try
       dir = atom.project.getPaths()[0] || '.'
-      if not fs.statSync(dir).isDirectory()
+      try
+        if not fs.statSync(dir).isDirectory()
+          throw new Error("Bad dir")
+      catch
         dir = p.dirname(dir)
       @child = spawn(cmd, args, cwd: dir)
+      currentPid = @child.pid
       @child.on 'error', (err) =>
         if err.message.match(/\bENOENT$/)
           view.append('Unable to find command: ' + cmd + '\n', 'stderr')
@@ -156,9 +160,10 @@ class AtomRunner
         view.append(data, 'stdout')
         view.scrollToBottom()
       @child.on 'close', (code, signal) =>
-        view.footer('Exited with code=' + code + ' in ' +
-          ((new Date - startTime) / 1000) + ' seconds')
-        @child = null
+        if @child.pid == currentPid
+          time = ((new Date - startTime) / 1000)
+          view.footer("Exited with code=#{code} in #{time} seconds")
+          view.scrollToBottom()
     catch err
       view.append(err.stack, 'stderr')
       view.scrollToBottom()
@@ -170,7 +175,7 @@ class AtomRunner
     else if !editor.getPath()
       @child.stdin.write(editor.getText())
     @child.stdin.end()
-    view.footer('Running: ' + cmd + ' ' + editor.getPath())
+    view.footer("Running: #{cmd} #{editor.getPath()} (pid #{@child.pid})")
 
   commandFor: (editor, selection) ->
     # try to find a shebang
