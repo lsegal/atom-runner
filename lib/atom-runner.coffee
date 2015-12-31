@@ -159,7 +159,7 @@ class AtomRunner
         view.append(data, 'stdout')
         view.scrollToBottom()
       @child.on 'close', (code, signal) =>
-        if @child.pid == currentPid
+        if @child && @child.pid == currentPid
           time = ((new Date - startTime) / 1000)
           view.footer("Exited with code=#{code} in #{time} seconds")
           view.scrollToBottom()
