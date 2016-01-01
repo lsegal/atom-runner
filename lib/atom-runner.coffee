@@ -1,6 +1,7 @@
 {ConfigObserver} = require 'atom'
 
 spawn = require('child_process').spawn
+treekill = require('tree-kill')
 fs = require('fs')
 url = require('url')
 p = require('path')
@@ -114,7 +115,7 @@ class AtomRunner
         view.append('^C', 'stdin')
       else
         @debug('Killed child', child.pid)
-      @child.kill('SIGINT')
+      treekill(@child.pid)
       if @child.killed
         @child = null
 
