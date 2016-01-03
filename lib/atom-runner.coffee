@@ -113,7 +113,7 @@ class AtomRunner
       if view and view.isOnDom()?
         view.append('^C', 'stdin')
       else
-        @debug('Killed child', child.pid)
+        @debug('Killed child', @child.pid)
       @child.kill('SIGINT')
       if @child.killed
         @child = null
