@@ -36,6 +36,7 @@ class AtomRunner
 
   extensionMap: null
   scopeMap: null
+  prev: null
 
   debug: (args...) ->
     console.debug('[atom-runner]', args...)
@@ -70,11 +71,13 @@ class AtomRunner
     atom.commands.add 'atom-workspace', 'run:selection', => @run(true)
     atom.commands.add 'atom-workspace', 'run:stop', => @stop()
     atom.commands.add 'atom-workspace', 'run:close', => @stopAndClose()
+    atom.commands.add 'atom-workspace', 'run:prev', => @run(false, true)
     atom.commands.add '.atom-runner', 'run:copy', =>
       atom.clipboard.write(window.getSelection().toString())
 
-  run: (selection) ->
+  run: (selection, rerun=false) ->
     editor = atom.workspace.getActiveTextEditor()
+    editor = @prev if rerun
     return unless editor?
 
     path = editor.getPath()
@@ -104,6 +107,8 @@ class AtomRunner
     unless view.mocked
       view.setTitle(editor.getTitle())
       pane.activateItem(view)
+
+    @prev = editor
 
     @execute(cmd, editor, view, selection)
 
