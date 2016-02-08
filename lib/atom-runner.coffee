@@ -88,7 +88,7 @@ class AtomRunner
     atom.commands.add '.atom-runner', 'run:copy', =>
       atom.clipboard.write(window.getSelection().toString())
 
-  run: (selection, rerun=true) ->
+  run: (selection, rerun=false) ->
     editor = atom.workspace.getActiveTextEditor()
     editor = @prev if rerun
     return unless editor?
