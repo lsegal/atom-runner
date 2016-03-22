@@ -10,10 +10,12 @@
 '.platform-darwin atom-text-editor':
   'ctrl-r': 'run:file'
   'ctrl-shift-r': 'run:selection'
+  'ctrl-q': 'run:prev'
 
 '.platform-win32 atom-text-editor, .platform-linux atom-text-editor':
   'alt-r': 'run:file'
   'alt-shift-r': 'run:selection'
+  'alt-q': 'run:prev'
 
 '.platform-darwin .atom-runner':
   'cmd-c': 'run:copy'
