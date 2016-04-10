@@ -10,11 +10,17 @@ AtomRunnerView = require './atom-runner-view'
 class AtomRunner
   config:
     showOutputWindow:
-      title: 'Show Output Window'
-      description: 'Displays the output window when running commands. Uncheck to hide output.'
+      title: 'Show Output Pane'
+      description: 'Displays the output pane when running commands. Uncheck to hide output.'
       type: 'boolean'
       default: true
       order: 1
+    paneSplitDirection:
+      title: 'Pane Split Direction'
+      description: 'The direction to split when opening the output pane.'
+      type: 'string'
+      default: 'Right'
+      enum: ['Right', 'Down', 'Up', 'Left']
 
   cfg:
     ext: 'runner.extensions'
@@ -36,6 +42,12 @@ class AtomRunner
 
   extensionMap: null
   scopeMap: null
+  splitFuncDefault: 'splitRight'
+  splitFuncs:
+    Right: 'splitRight'
+    Left: 'splitLeft'
+    Up: 'splitUp'
+    Down: 'splitDown'
 
   debug: (args...) ->
     console.debug('[atom-runner]', args...)
@@ -88,7 +100,9 @@ class AtomRunner
       if not view?
         view = new AtomRunnerView(editor.getTitle())
         panes = atom.workspace.getPanes()
-        pane = panes[panes.length - 1].splitRight(view)
+        dir = atom.config.get('atom-runner.paneSplitDirection')
+        dirfunc = @splitFuncs[dir] || @splitFuncDefault
+        pane = panes[panes.length - 1][dirfunc](view)
     else
       view =
         mocked: true
