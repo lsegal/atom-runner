@@ -85,6 +85,18 @@ class AtomRunner
     atom.commands.add '.atom-runner', 'run:copy', =>
       atom.clipboard.write(window.getSelection().toString())
 
+  translateMacros: (cmd) ->
+    editor = atom.workspace.getActiveTextEditor()
+    return cmd unless editor?
+
+    cmd
+      .replace('{FILE_ACTIVE}', editor.getPath())
+      # .replace('{FILE_ACTIVE_PATH}', TODO)
+      # .replace('{FILE_ACTIVE_NAME}', TODO)
+      # .replace('{FILE_ACTIVE_NAME_BASE}', TODO)
+      # .replace('{FILE_ACTIVE_PATH}', TODO)
+      # .replace('{PROJECT_PATH}', TODO)
+
   run: (selection) ->
     editor = atom.workspace.getActiveTextEditor()
     return unless editor?
@@ -94,6 +106,8 @@ class AtomRunner
     unless cmd?
       console.warn("No registered executable for file '#{path}'")
       return
+
+    cmd = @translateMacros(cmd)
 
     if atom.config.get('atom-runner.showOutputWindow')
       {pane, view} = @runnerView()
