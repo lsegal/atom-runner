@@ -76,7 +76,7 @@ Note that the `.` extension prefix is ignored for extension listings.
 
 ## FAQ And Known Issues
 
-### 1. I keep getting `spawn node ENOENT` errors. Why?
+### 1. I keep getting `spawn node ENOENT` or `Unable to find command` errors. Why?
 
 Atom-runner relies on your `PATH` environment variable to run executables through your shell.
 In order to correctly run executables, they must be in your `PATH`. In Mac OS X systems,
