@@ -34,7 +34,7 @@ below, which also represents the default configuration for this plugin:
 ```cson
 'runner':
   'scopes':
-    'coffee': 'coffee'
+    'coffee': 'coffee {FILE_ACTIVE}'
     'js': 'node'
     'ruby': 'ruby'
     'python': 'python'
@@ -113,7 +113,7 @@ steps to show the issue, please file a bug report. Please make sure that you pro
 detailed steps and include your environment (OS), language, and, if relevant, any
 source code you executed when running into the issue. Without this information,
 it is not always possible to know what is broken, and this will slow down the
-ability to provide a quick patch for any bugs. 
+ability to provide a quick patch for any bugs.
 
 Thanks for cooperating!
 
