@@ -28,7 +28,7 @@ class AtomRunner
 
   defaultExtensionMap:
     'spec.coffee': 'mocha'
-    'ps1': 'c:\\windows\\sysnative\\windowspowershell\\v1.0\\powershell.exe -file'
+    'ps1': 'powershell -file'
     '_test.go': 'go test'
 
   defaultScopeMap:
@@ -38,7 +38,7 @@ class AtomRunner
     python: 'python'
     go: 'go run'
     shell: 'bash'
-    powershell: 'c:\\windows\\sysnative\\windowspowershell\\v1.0\\powershell.exe -noninteractive -noprofile -c -'
+    powershell: 'powershell -noninteractive -noprofile -c -'
 
   extensionMap: null
   scopeMap: null

@@ -28,22 +28,26 @@ You can add more commands for a given language scope, or add commands by
 extension instead (if multiple extensions use the same syntax). Extensions
 are searched before scopes (syntaxes).
 
-To do so, add the configuration to `~/.atom/config.cson` in the format provided
-below, which also represents the default configuration for this plugin:
+To do so, add the `'runner'` configuration object to `~/.atom/config.cson`
+(or go to **File -> Config...**) in the format provided below, which also represents the
+default configuration for this plugin:
 
 ```cson
-'runner':
-  'scopes':
-    'coffee': 'coffee'
-    'js': 'node'
-    'ruby': 'ruby'
-    'python': 'python'
-    'go': 'go run'
-    'shell': 'bash'
-    'powershell': 'c:\\windows\\sysnative\\windowspowershell\\v1.0\\powershell.exe -noninteractive -noprofile -c -'
-  'extensions':
-    'spec.coffee': 'mocha'
-    'ps1': 'c:\\windows\\sysnative\\windowspowershell\\v1.0\\powershell.exe –file'
+# Make sure to place 'runner' under '*' object.
+'*':
+  ...
+  'runner':
+    'scopes':
+      'coffee': 'coffee'
+      'js': 'node'
+      'ruby': 'ruby'
+      'python': 'python'
+      'go': 'go run'
+      'shell': 'bash'
+      'powershell': 'powershell -noninteractive -noprofile -c -'
+    'extensions':
+      'spec.coffee': 'mocha'
+      'ps1': 'powershell –file'
 ```
 
 **IMPORTANT NOTE**: Spaces are significant in the configuring of `.cson`
@@ -57,9 +61,12 @@ The mapping is `SCOPE|EXT => EXECUTABLE`, so to run JavaScript files through
 phantom, you would do:
 
 ```cson
-'runner':
-  'scopes':
-    'js': 'phantom'
+# Make sure to place 'runner' under '*' object.
+'*':
+  ...
+  'runner':
+    'scopes':
+      'js': 'phantom'
 ```
 
 Note that the `source.` prefix is ignored for syntax scope listings.
@@ -67,9 +74,12 @@ Note that the `source.` prefix is ignored for syntax scope listings.
 Similarly, in the extension map:
 
 ```cson
-'runner':
-  'extensions':
-    'js': 'phantom'
+# Make sure to place 'runner' under '*' object.
+'*':
+  ...
+  'runner':
+    'extensions':
+      'js': 'phantom'
 ```
 
 Note that the `.` extension prefix is ignored for extension listings.
@@ -113,7 +123,7 @@ steps to show the issue, please file a bug report. Please make sure that you pro
 detailed steps and include your environment (OS), language, and, if relevant, any
 source code you executed when running into the issue. Without this information,
 it is not always possible to know what is broken, and this will slow down the
-ability to provide a quick patch for any bugs. 
+ability to provide a quick patch for any bugs.
 
 Thanks for cooperating!
 
