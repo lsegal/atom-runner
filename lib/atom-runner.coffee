@@ -40,6 +40,7 @@ class AtomRunner
     shell: 'bash'
     powershell: 'powershell -noninteractive -noprofile -c -'
 
+  timer: null
   extensionMap: null
   scopeMap: null
   splitFuncDefault: 'splitRight'
@@ -131,6 +132,8 @@ class AtomRunner
       @child.kill('SIGINT')
       if @child.killed
         @child = null
+    clearInterval(@timer) if @timer
+    @timer = null
 
   stopAndClose: ->
     {pane, view} = @runnerView()
@@ -157,6 +160,7 @@ class AtomRunner
       catch
         dir = p.dirname(dir)
       @child = spawn(cmd, args, cwd: dir)
+      @timer = setInterval((=> view.appendFooter('.')), 750)
       currentPid = @child.pid
       @child.on 'error', (err) =>
         if err.message.match(/\bENOENT$/)
@@ -166,6 +170,7 @@ class AtomRunner
         view.append(err.stack, 'stderr')
         view.scrollToBottom()
         @child = null
+        clearInterval(@timer) if @timer
       @child.stderr.on 'data', (data) =>
         view.append(data, 'stderr')
         view.scrollToBottom()
@@ -175,20 +180,22 @@ class AtomRunner
       @child.on 'close', (code, signal) =>
         if @child && @child.pid == currentPid
           time = ((new Date - startTime) / 1000)
-          view.footer("Exited with code=#{code} in #{time} seconds")
+          view.appendFooter(" Exited with code=#{code} in #{time} seconds.")
           view.scrollToBottom()
+          clearInterval(@timer) if @timer
     catch err
       view.append(err.stack, 'stderr')
       view.scrollToBottom()
       @stop()
 
     startTime = new Date
-    if selection
-      @child.stdin.write(editor.getLastSelection().getText())
-    else if !editor.getPath()
-      @child.stdin.write(editor.getText())
-    @child.stdin.end()
-    view.footer("Running: #{cmd} #{editor.getPath()} (pid #{@child.pid})")
+    try
+      if selection
+        @child.stdin.write(editor.getLastSelection().getText())
+      else if !editor.getPath()
+        @child.stdin.write(editor.getText())
+      @child.stdin.end()
+    view.footer("Running: #{cmd} (cwd=#{editor.getPath()} pid=#{@child.pid}).")
 
   commandFor: (editor, selection) ->
     # try to find a shebang

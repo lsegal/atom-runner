@@ -48,6 +48,9 @@ class AtomRunnerView extends ScrollView
     span.innerHTML = new AnsiToHtml().toHtml(span.innerHTML)
     span.className = className || 'stdout'
     @_output.append(span)
+  
+  appendFooter: (text) ->
+    @_footer.html(@_footer.html() + text)
 
   footer: (text) ->
     @_footer.html(text)
