@@ -160,7 +160,7 @@ class AtomRunner
       catch
         dir = p.dirname(dir)
       @child = spawn(cmd, args, cwd: dir)
-      @timer = setInterval((=> view.appendFooter('.')), 750)
+      @timer = setInterval((=> view.appendFooter(' . ')), 750)
       currentPid = @child.pid
       @child.on 'error', (err) =>
         if err.message.match(/\bENOENT$/)
