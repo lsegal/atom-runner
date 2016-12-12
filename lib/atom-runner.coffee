@@ -90,6 +90,7 @@ class AtomRunner
     editor = atom.workspace.getActiveTextEditor()
     return unless editor?
 
+    editor.save()
     path = editor.getPath()
     cmd = @commandFor(editor, selection)
     unless cmd?
