@@ -50,6 +50,7 @@ class AtomRunner
     Up: 'splitUp'
     Down: 'splitDown'
   prev: null
+  prevWasSelection: false
 
   debug: (args...) ->
     console.debug('[atom-runner]', args...)
@@ -92,6 +93,8 @@ class AtomRunner
     editor = atom.workspace.getActiveTextEditor()
     editor = @prev if rerun
     return unless editor?
+    
+    selection = @prevWasSelection if rerun
 
     path = editor.getPath()
     cmd = @commandFor(editor, selection)
@@ -124,6 +127,7 @@ class AtomRunner
       pane.activateItem(view)
 
     @prev = editor
+    @prevWasSelection = selection
 
     @execute(cmd, editor, view, selection)
 
