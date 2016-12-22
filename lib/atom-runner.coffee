@@ -96,7 +96,8 @@ class AtomRunner
       console.warn("No registered executable for file '#{path}'")
       return
 
-    if atom.config.get('atom-runner.showOutputWindow')
+    scope = editor.getLastCursor().getScopeDescriptor()
+    if atom.config.get('atom-runner.showOutputWindow', scope: scope)
       {pane, view} = @runnerView()
       if not view?
         view = new AtomRunnerView(editor.getTitle())
